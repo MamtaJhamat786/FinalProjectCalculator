@@ -1,4 +1,4 @@
-package com.example.advancecalculator;
+package com.example.firebasedemo;
 
 import org.junit.Test;
 

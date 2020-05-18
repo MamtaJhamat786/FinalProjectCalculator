@@ -1,4 +1,4 @@
-package com.example.advancecalculator.activities;
+package com.example.firebasedemo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,20 +13,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.advancecalculator.R;
-import com.example.advancecalculator.controller.CalculatorController;
-import com.example.advancecalculator.storage.FirestoreDatabase;
+import com.example.firebasedemo.databasestorage.FirebaseDatabase;
+import com.example.firebasedemo.R;
+import com.example.firebasedemo.allcalculations.CalculatorController;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-    public ArrayList<String> arrayList;
+    public ArrayList<String> arrayList = new ArrayList<>();
     public static final String SHARED_PREF = "sharedRef";
     public static final String History = "history";
     boolean isEqualPressed = false;
@@ -41,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
     double variable1, variable2;
     int var3;
     CalculatorController calc;
-    FirestoreDatabase firestoreDatabase;
     String number1, number2, combined, plus;
     boolean add, subtract, multiply, divide, power, fact, root, sin, cos, tan, logvalue, lnValue;
     boolean square, cube, inverse;
     final int factorial = 1;
+    FirebaseDatabase firebaseDatabase= new FirebaseDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -261,8 +260,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 input.setText(input.getText() + "3.14");
-                variable2= 3.14;
-                calc.setNumberSecond(variable2);
+                variable1= 3.14;
+                calc.setNumberSecond(variable1  );
 
 
             }
@@ -462,9 +461,9 @@ public class MainActivity extends AppCompatActivity {
                     calc.setNumberSecond(variable2);
                     try {
                         calc.calculate();
-                        arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
-//                        firestoreDatabase.saveToFirebase(calc.printEquation());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
+                        arrayList.add(calc.printEquation());
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -484,6 +483,7 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -497,15 +497,14 @@ public class MainActivity extends AppCompatActivity {
                     String part2 = parts[1];
                     variable2 = Double.parseDouble(part2);
                     calc.setNumberSecond(variable2);
-
                     try {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
 
                     multiply = false;
                     saveData();
@@ -523,6 +522,7 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -542,6 +542,7 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -554,10 +555,10 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     root = false;
                     saveData();
                 }
@@ -566,10 +567,10 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
 
                     sin = false;
                     saveData();
@@ -580,6 +581,7 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -592,6 +594,7 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -605,6 +608,7 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -617,6 +621,7 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -629,10 +634,10 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     square = false;
                     saveData();
                 }
@@ -642,10 +647,10 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
 
                     cube = false;
                     saveData();
@@ -656,6 +661,7 @@ public class MainActivity extends AppCompatActivity {
                         calc.calculate();
                         arrayList.add(calc.printEquation());
                         result.setText(calc.printResults());
+                        firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -672,6 +678,7 @@ public class MainActivity extends AppCompatActivity {
                     String resultInString = result.getText().toString();
                     numberToPutInArrayList = input.getText() + " + " + resultInString;
                     arrayList.add(numberToPutInArrayList);
+                    firebaseDatabase.saveDataToFirebase(calc.printEquation());
                     fact = false;
                     saveData();
                 }
@@ -703,5 +710,4 @@ public class MainActivity extends AppCompatActivity {
             arrayList = gson.fromJson(json, type);
         }
     }
-
 }
