@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     boolean add, subtract, multiply, divide, power, fact, root, sin, cos, tan, logvalue, lnValue;
     boolean square, cube, inverse;
     final int factorial = 1;
-    FirebaseDatabase firebaseDatabase= new FirebaseDatabase();
+    FirebaseDatabase firebaseDatabase = new FirebaseDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +113,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 result.setText(null);
                 input.setText(null);
+                isEqualPressed = false;
+                add = false;
+                subtract = false;
+                multiply = false;
+                divide = false;
+                power = false;
+                fact = false;
+                root = false;
+                sin = false;
+                cos = false;
+                tan = false;
+                logvalue = false;
+                lnValue = false;
+                square = false;
+                cube = false;
+                inverse = false;
+
             }
         });
         btn_clear.setOnClickListener(new View.OnClickListener() {
@@ -194,256 +211,581 @@ public class MainActivity extends AppCompatActivity {
         btn_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEqualPressed) {
+                if (input.getText().toString().isEmpty()) {
+                    result.setText(null);
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !add) {
                     input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("ADDITION");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("+");
+                    input.setText(number1);
+                    add = true;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && add) {
+                    return;
+                } else if (isEqualPressed == false && !add) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("ADDITION");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("+");
+                    input.setText(number1);
+                    add = true;
+                } else if (isEqualPressed == false && add) {
+                    return;
+                } else {
+                    return;
                 }
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("ADDITION");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                number1 = number1.concat("+");
-                input.setText(number1);
-                add = true;
             }
         });
         btn_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEqualPressed) {
+                if (input.getText().toString().isEmpty()) {
+                    result.setText(null);
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !subtract) {
                     input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("SUBTRACTION");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("-");
+                    input.setText(number1);
+                    subtract = true;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && add) {
+                    return;
+                } else if (isEqualPressed == false && !subtract) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("SUBTRACTION");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("-");
+                    input.setText(number1);
+                    subtract = true;
+                } else if (isEqualPressed == false && subtract) {
+                    return;
+                } else {
+                    return;
                 }
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("SUBTRACTION");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                number1 = number1.concat("-");
-                input.setText(number1);
-                subtract = true;
             }
         });
         btn_multiply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEqualPressed) {
+                if (input.getText().toString().isEmpty()) {
+                    result.setText(null);
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !multiply) {
                     input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("MULTIPLICATION");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("*");
+                    input.setText(number1);
+                    multiply = true;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && multiply) {
+                    return;
+                } else if (isEqualPressed == false && !multiply) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("MULTIPLICATION");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("*");
+                    input.setText(number1);
+                    multiply = true;
+                } else if (isEqualPressed == false && multiply) {
+                    return;
+                } else {
+                    return;
                 }
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("MULTIPLICATION");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                number1 = number1.concat("*");
-                input.setText(number1);
-                multiply = true;
             }
         });
         btn_divide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEqualPressed) {
+                if (input.getText().toString().isEmpty()) {
+                    result.setText(null);
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !divide) {
                     input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("DIVISION");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("/");
+                    input.setText(number1);
+                    divide = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && divide) {
+                    return;
+                } else if (isEqualPressed == false && !divide) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("DIVISION");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("/");
+                    input.setText(number1);
+                    divide = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && divide) {
+                    return;
+                } else {
+                    return;
                 }
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("DIVISION");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                number1 = number1.concat("/");
-                input.setText(number1);
-                divide = true;
-                result.setText(null);
+
             }
         });
         btn_pi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 input.setText(input.getText() + "3.14");
-                variable1= 3.14;
-                calc.setNumberSecond(variable1  );
-
+                variable1 = 3.14;
+                calc.setNumberSecond(variable1);
 
             }
         });
         btn_inverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("INVERSE");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                String one = "1/";
-                combined = one + " " + number1;// 1/ number
-                input.setText(combined);
-                inverse = true;
-                result.setText(null);
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !inverse) {
+                    input.setText(result.getText() + "");
+                    result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("INVERSE");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String one = "1/";
+                    combined = one + " " + number1;// 1/ number
+                    input.setText(combined);
+                    inverse = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && inverse) {
+                    return;
+                } else if (isEqualPressed == false && !inverse) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("INVERSE");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String one = "1/";
+                    combined = one + " " + number1;// 1/ number
+                    input.setText(combined);
+                    inverse = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && inverse) {
+                    return;
+                } else {
+                    return;
+                }
             }
         });
 
         btn_power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEqualPressed) {
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !power) {
                     input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("POWER");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    //var3=Integer.parseInt(result.getText()+"");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("^");
+                    input.setText(number1);
+                    power = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && power) {
+                    return;
+                } else if (isEqualPressed == false && !power) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("POWER");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("^");
+                    input.setText(number1);
+                    power = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && power) {
+                    return;
+                } else {
+                    return;
                 }
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("POWER");
-                variable1 = Double.parseDouble(input.getText() + "");
-                //var3=Integer.parseInt(result.getText()+"");
-                number1 = String.valueOf(variable1);
-                number1 = number1.concat("^");
-                input.setText(number1);
-                power = true;
-                result.setText(null);
             }
         });
         btn_square.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEqualPressed) {
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !square) {
                     input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("SQUARE");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("^2");
+                    input.setText(number1);
+                    square = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && square) {
+                    return;
+                } else if (isEqualPressed == false && !square) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("SQUARE");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("^2");
+                    input.setText(number1);
+                    square = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && square) {
+                    return;
+                } else {
+                    return;
                 }
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("SQUARE");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                number1 = number1.concat("^2");
-                input.setText(number1);
-                square = true;
-                result.setText(null);
             }
         });
         btn_cube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEqualPressed) {
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !cube) {
                     input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("CUBE");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("^3");
+                    input.setText(number1);
+                    cube = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && cube) {
+                    return;
+                } else if (isEqualPressed == false && !cube) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("CUBE");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    number1 = number1.concat("^3");
+                    input.setText(number1);
+                    cube = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && cube) {
+                    return;
+                } else {
+                    return;
                 }
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("CUBE");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                number1 = number1.concat("^3");
-                input.setText(number1);
-                cube = true;
-                result.setText(null);
             }
         });
         btn_sin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("SIN");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                String sin1 = "sin(";
-                combined = sin1 + " " + number1 + ")";// 1/ number
-                input.setText(combined);
-                sin = true;
-                result.setText(null);
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !sin) {
+                    input.setText(result.getText() + "");
+                    result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("SIN");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String sin1 = "sin(";
+                    combined = sin1 + " " + number1 + ")";// 1/ number
+                    input.setText(combined);
+                    sin = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && sin) {
+                    return;
+                } else if (isEqualPressed == false && !sin) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("SIN");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String sin1 = "sin(";
+                    combined = sin1 + " " + number1 + ")";// 1/ number
+                    input.setText(combined);
+                    sin = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && sin) {
+                    return;
+                } else {
+                    return;
+                }
             }
         });
         btn_cos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("COS");
-
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                String cos1 = "cos(";
-                combined = cos1 + " " + number1 + ")";
-                if (variable1 == 90) {
-                    input.setText(combined);
-                    String zero = "0";
-                    result.setText(zero + "");
-                } else {
-                    input.setText(combined);
-                    cos = true;
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !cos) {
+                    input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("COS");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String cos1 = "cos(";
+                    combined = cos1 + " " + number1 + ")";
+                    if (variable1 == 90) {
+                        input.setText(combined);
+                        String zero = "0";
+                        result.setText(zero + "");
+                    } else {
+                        input.setText(combined);
+                        cos = true;
+                        result.setText(null);
+                    }
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && cos) {
+                    return;
+                } else if (isEqualPressed == false && !cos) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("COS");
+                    Log.i("myTag", input.getText() + "");
+
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String cos1 = "cos(";
+                    combined = cos1 + " " + number1 + ")";
+                    if (variable1 == 90) {
+                        input.setText(combined);
+                        String zero = "0";
+                        result.setText(zero + "");
+                    } else {
+                        input.setText(combined);
+                        cos = true;
+                        result.setText(null);
+                    }
+                } else if (isEqualPressed == false && cos) {
+                    return;
+                } else {
+                    return;
                 }
             }
         });
         btn_tan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("TAN");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                String tan1 = "tan(";
-                combined = tan1 + " " + number1 + ")";
-                if (variable1 == 90) {
-                    input.setText(combined);
-                    String infinity = "infinity";
-                    result.setText(infinity + "");
-                } else {
-                    input.setText(combined);
-                    tan = true;
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !tan) {
+                    input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("TAN");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String tan1 = "tan(";
+                    combined = tan1 + " " + number1 + ")";
+                    if (variable1 == 90) {
+                        input.setText(combined);
+                        String infinity = "infinity";
+                        result.setText(infinity + "");
+                    } else {
+                        input.setText(combined);
+                        tan = true;
+                        result.setText(null);
+                    }
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && tan) {
+                    return;
+                } else if (isEqualPressed == false && !tan) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("TAN");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String tan1 = "tan(";
+                    combined = tan1 + " " + number1 + ")";
+                    if (variable1 == 90) {
+                        input.setText(combined);
+                        String infinity = "infinity";
+                        result.setText(infinity + "");
+                    } else {
+                        input.setText(combined);
+                        tan = true;
+                        result.setText(null);
+                    }
+                } else if (isEqualPressed == false && tan) {
+                    return;
+                } else {
+                    return;
                 }
             }
         });
         btn_factorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //var1=Double.parseDouble(result.getText().toString()+"");
-                var3 = Integer.parseInt(input.getText() + "");
-                number1 = String.valueOf(var3);
-                number1 = number1.concat("!");
-                input.setText(number1);
-                fact = true;
-                result.setText(null);
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !fact) {
+                    input.setText(result.getText() + "");
+                    result.setText(null);
+                    var3 = Integer.parseInt(input.getText() + "");
+                    number1 = String.valueOf(var3);
+                    number1 = number1.concat("!");
+                    input.setText(number1);
+                    fact = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && fact) {
+                    return;
+                } else if (isEqualPressed == false && !fact) {
+                    var3 = Integer.parseInt(input.getText() + "");
+                    number1 = String.valueOf(var3);
+                    number1 = number1.concat("!");
+                    input.setText(number1);
+                    fact = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && fact) {
+                    return;
+                } else {
+                    return;
+                }
             }
         });
         btn_root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEqualPressed) {
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !root) {
                     input.setText(result.getText() + "");
                     result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("UNDERROOT");
+                    variable1 = Double.parseDouble(input.getText().toString() + "");
+                    number1 = String.valueOf(variable1);
+                    String underroot = "√" + number1;
+                    input.setText(underroot);
+                    root = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && root) {
+                    return;
+                } else if (isEqualPressed == false && !root) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("UNDERROOT");
+                    variable1 = Double.parseDouble(input.getText().toString() + "");
+                    number1 = String.valueOf(variable1);
+                    String underroot = "√" + number1;
+                    input.setText(underroot);
+                    root = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && root) {
+                    return;
+                } else {
+                    return;
                 }
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("UNDERROOT");
-                variable1 = Double.parseDouble(input.getText().toString() + "");
-                number1 = String.valueOf(variable1);
-                String underroot = "√" + number1;
-                input.setText(underroot);
-                root = true;
-                result.setText(null);
             }
         });
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("LOG");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                String log = "log(";
-                combined = log + " " + number1 + ")";// 1/ number
-                input.setText(combined);
-                logvalue = true;
-                result.setText(null);
-
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !logvalue) {
+                    input.setText(result.getText() + "");
+                    result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("LOG");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String log = "log(";
+                    combined = log + " " + number1 + ")";// 1/ number
+                    input.setText(combined);
+                    logvalue = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && logvalue) {
+                    return;
+                } else if (isEqualPressed == false && !logvalue) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("LOG");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String log = "log(";
+                    combined = log + " " + number1 + ")";// 1/ number
+                    input.setText(combined);
+                    logvalue = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && logvalue) {
+                    return;
+                } else {
+                    return;
+                }
             }
         });
         ln.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
-                calc.setOperation("LN");
-                variable1 = Double.parseDouble(input.getText() + "");
-                number1 = String.valueOf(variable1);
-                String ln = "ln(";
-                combined = ln + " " + number1 + ")";// 1/ number
-                input.setText(combined);
-                lnValue = true;
-                result.setText(null);
+                if (input.getText().toString().isEmpty()) {
+                    result.setText("Error" + "");
+                } else if (isEqualPressed && input.getText().toString().isEmpty()) {
+                    return;
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && !lnValue) {
+                    input.setText(result.getText() + "");
+                    result.setText(null);
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("LN");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String ln = "ln(";
+                    combined = ln + " " + number1 + ")";// 1/ number
+                    input.setText(combined);
+                    lnValue = true;
+                    result.setText(null);
+                } else if (isEqualPressed && !input.getText().toString().isEmpty() && lnValue) {
+                    return;
+                } else if (isEqualPressed == false && !lnValue) {
+                    calc.setNumberFirst(Double.parseDouble(input.getText() + ""));
+                    calc.setOperation("LN");
+                    variable1 = Double.parseDouble(input.getText() + "");
+                    number1 = String.valueOf(variable1);
+                    String ln = "ln(";
+                    combined = ln + " " + number1 + ")";// 1/ number
+                    input.setText(combined);
+                    lnValue = true;
+                    result.setText(null);
+                } else if (isEqualPressed == false && lnValue) {
+                    return;
+                } else {
+                    return;
+                }
             }
         });
 
